@@ -1,4 +1,5 @@
-import { Controller, Get, Param } from "@nestjs/common"
+import { Controller, Get, Param, Request, UseGuards } from "@nestjs/common"
+import { AuthGuard } from "@nestjs/passport";
 import { ProductService } from "./product.service"
 
 @Controller('product')
@@ -9,11 +10,18 @@ export class ProductController {
 
   @Get()
   async getPackages(): Promise<any> {
-    return await this.productService.getPackages();
+    return await this.productService.getProductTree();
+  }
+
+  @UseGuards(AuthGuard())
+  @Get('purchase_history')
+  async getPurchaseHistory(@Request() request): Promise<any> {
+    return await this.productService.getPurchaseHistory(request.user.username);
   }
 
   @Get(':id')
   async getPackage(@Param('id') id: number): Promise<any> {
-    return await this.productService.getPackage(id);
+    return await this.productService.getProduct(id);
   }
+
 }

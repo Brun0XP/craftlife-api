@@ -4,15 +4,18 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { UserModule } from "src/user/user.module";
 import { ProductService } from "./product.service";
-import { TebexService } from "src/tebex/tebex.service";
 import { ProductController } from "./product.controller";
+import { TebexService } from "src/checkout/tebex/tebex.service";
+import { PassportModule } from "@nestjs/passport";
 
 @Module({
   providers: [
     ProductService,
     TebexService,
   ],
-  imports: [],
+  imports: [
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+  ],
   controllers: [
     ProductController,
   ],

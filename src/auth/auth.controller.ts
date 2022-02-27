@@ -9,7 +9,7 @@ export class AuthController {
     private readonly authService: AuthService,
   ) { }
 
-  @UseGuards  (AuthGuard('local'))
+  @UseGuards(AuthGuard('local'))
   @Post('login')
   login(@Request() req) {
     return this.authService.login(req.user);

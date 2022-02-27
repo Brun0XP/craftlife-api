@@ -2,13 +2,21 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { CheckoutModule } from './checkout/checkout.module';
 import { MYSQL_CONNECTION } from './constants';
+import { EmailModule } from './email/email.module';
 import { ProductModule } from './product/product.module';
+import { UserModule } from './user/user.module';
+import { WebhookModule } from './webhook/webhook.module';
 
 @Module({
   imports: [
     AuthModule,
     ProductModule,
+    UserModule,
+    CheckoutModule,
+    EmailModule,
+    WebhookModule,
     ConfigModule.forRoot({ envFilePath: `${process.env.NODE_ENV}.env` }),
     TypeOrmModule.forRoot({
       type: 'postgres',
