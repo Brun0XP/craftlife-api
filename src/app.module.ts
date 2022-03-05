@@ -20,6 +20,7 @@ import { WebhookModule } from './webhook/webhook.module';
     EmailModule,
     WebhookModule,
     ServerModule,
+    PaymentModule,
     ConfigModule.forRoot({ envFilePath: `${process.env.NODE_ENV}.env` }),
     TypeOrmModule.forRoot({
       type: 'postgres',

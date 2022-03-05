@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { MercadopagoPayment, MercadopagoResponse } from "./mercadopago.interface";
 import * as mercadopago from 'mercadopago';
+import { Payment } from "src/model/postgres/payment.model";
 
 @Injectable()
 export class MercadopagoService {
@@ -36,7 +37,17 @@ export class MercadopagoService {
     };
   }
 
-  async getPayment(id: number): Promise<any>{
-    return (await mercadopago.payment.get(id)).body;
+  async getPayment(id: number): Promise<Payment>{
+    const bodyResponse = (await mercadopago.payment.get(id)).body;
+    return {
+      id: bodyResponse.id,
+      username: bodyResponse.metadata.username,
+      transaction_amount: bodyResponse.transaction_amount,
+      package_id: bodyResponse.metadata.product_id,
+      status: bodyResponse.status,
+      payment_method_id: bodyResponse.payment_method_id,
+      installments: bodyResponse.installments,
+      external_reference: bodyResponse.external_reference,
+    };
   }
 }
