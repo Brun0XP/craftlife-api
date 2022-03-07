@@ -7,6 +7,7 @@ import { MYSQL_CONNECTION } from './constants';
 import { EmailModule } from './email/email.module';
 import { PaymentModule } from './payment/payment.module';
 import { ProductModule } from './product/product.module';
+import { PunishmentModule } from './punishment/punishment.module';
 import { ServerModule } from './server/server.module';
 import { UserModule } from './user/user.module';
 import { WebhookModule } from './webhook/webhook.module';
@@ -21,6 +22,7 @@ import { WebhookModule } from './webhook/webhook.module';
     WebhookModule,
     ServerModule,
     PaymentModule,
+    PunishmentModule,
     ConfigModule.forRoot({ envFilePath: `${process.env.NODE_ENV}.env` }),
     TypeOrmModule.forRoot({
       type: 'postgres',
