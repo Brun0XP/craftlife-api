@@ -24,7 +24,7 @@ export class AuthService {
       sub: user.username,
     };
     return {
-      access_token: await this.jwtService.sign(payload, { expiresIn: '3y' }),
+      access_token: await this.jwtService.sign(payload, { expiresIn: '30d' }),
       hasEmail: !!user.email,
     };
   }
